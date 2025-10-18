@@ -1,0 +1,8 @@
+../USB_DEVICE/App/usbd_dfu_if.c:156:10:MEM_If_Init_FS	8	static
+../USB_DEVICE/App/usbd_dfu_if.c:168:10:MEM_If_DeInit_FS	8	static
+../USB_DEVICE/App/usbd_dfu_if.c:181:10:MEM_If_Erase_FS	48	static
+../USB_DEVICE/App/usbd_dfu_if.c:210:10:MEM_If_Write_FS	40	static
+../USB_DEVICE/App/usbd_dfu_if.c:241:10:MEM_If_Read_FS	32	static
+../USB_DEVICE/App/usbd_dfu_if.c:263:10:MEM_If_GetStatus_FS	24	static
+../USB_DEVICE/App/usbd_dfu_if.c:292:17:GetSector	24	static
+../USB_DEVICE/App/usbd_dfu_if.c:315:17:GetBank	24	static
