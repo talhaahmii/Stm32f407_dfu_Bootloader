@@ -1,2 +1,2 @@
 ../Core/Src/jump_to_app.c:8:6:is_valid_application	16	static
-../Core/Src/jump_to_app.c:22:6:jump_to_application	24	static,ignoring_inline_asm
+../Core/Src/jump_to_app.c:29:6:jump_to_application	24	static,ignoring_inline_asm

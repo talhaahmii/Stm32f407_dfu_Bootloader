@@ -61,11 +61,14 @@
   * @{
   */
 
-#define FLASH_DESC_STR      "@Internal Flash   /0x08000000/03*016Ka,01*016Kg,01*064Kg,07*128Kg,04*016Kg,01*064Kg,07*128Kg"
+#define FLASH_DESC_STR      "@Internal Flash   /0x08010000/01*064Kg,07*128Kg,04*016Kg,01*064Kg,07*128Kg"
 
 /* USER CODE BEGIN PRIVATE_DEFINES */
-#define FLASH_PROGRAM_TIME  (uint16_t)50
-#define FLASH_ERASE_TIME    (uint16_t)50
+#define FLASH_PROGRAM_TIME    (uint16_t)50
+#define FLASH_ERASE_TIME      (uint16_t)50
+#define BOOTLOADER_SIZE       (uint32_t)0x10000    /* 64KB */
+#define FLASH_BASE_ADDR       (uint32_t)0x08000000
+#define FLASH_END_ADDR        (uint32_t)0x080FFFFF /* 1MB Flash */
 /* USER CODE END PRIVATE_DEFINES */
 
 /**
@@ -181,6 +184,11 @@ uint16_t MEM_If_DeInit_FS(void)
 uint16_t MEM_If_Erase_FS(uint32_t Add)
 {
   /* USER CODE BEGIN 2 */
+    // Protect bootloader area
+    if (Add < (FLASH_BASE_ADDR + BOOTLOADER_SIZE)) {
+        return 1;  // Reject operations in bootloader area
+    }
+
     uint32_t startsector = 0, sectorerror = 0;
     HAL_StatusTypeDef status;
     FLASH_EraseInitTypeDef eraseinitstruct;
@@ -210,6 +218,11 @@ uint16_t MEM_If_Erase_FS(uint32_t Add)
 uint16_t MEM_If_Write_FS(uint8_t *src, uint8_t *dest, uint32_t Len)
 {
   /* USER CODE BEGIN 3 */
+    // Protect bootloader area
+    if ((uint32_t)dest < (FLASH_BASE_ADDR + BOOTLOADER_SIZE)) {
+        return 1;  // Reject operations in bootloader area
+    }
+
     uint32_t i = 0;
 
     for (i = 0; i < Len; i += 4) {

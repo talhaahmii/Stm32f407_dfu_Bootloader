@@ -64,8 +64,8 @@ all: main-build
 main-build: Stm32f407_dfu_BTL.elf secondary-outputs
 
 # Tool invocations
-Stm32f407_dfu_BTL.elf Stm32f407_dfu_BTL.map: $(OBJS) $(USER_OBJS) D:\Stm32f407\Stm32f407_dfu_BTL\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Stm32f407_dfu_BTL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"D:\Stm32f407\Stm32f407_dfu_BTL\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Stm32f407_dfu_BTL.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Stm32f407_dfu_BTL.elf Stm32f407_dfu_BTL.map: $(OBJS) $(USER_OBJS) C:\Users\Talha\ Ahmed\Documents\Stm32f407_dfu_Bootloader\STM32F407VETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Stm32f407_dfu_BTL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\Talha Ahmed\Documents\Stm32f407_dfu_Bootloader\STM32F407VETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Stm32f407_dfu_BTL.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

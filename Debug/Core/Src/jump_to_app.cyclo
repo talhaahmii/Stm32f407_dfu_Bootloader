@@ -1,2 +1,2 @@
-../Core/Src/jump_to_app.c:8:6:is_valid_application	4
-../Core/Src/jump_to_app.c:22:6:jump_to_application	2
+../Core/Src/jump_to_app.c:8:6:is_valid_application	6
+../Core/Src/jump_to_app.c:29:6:jump_to_application	2

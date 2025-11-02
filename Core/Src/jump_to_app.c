@@ -10,11 +10,18 @@ bool is_valid_application(void)
     uint32_t app_msp = *((uint32_t*)APP_START_ADDRESS);
     uint32_t app_reset = *((uint32_t*)(APP_START_ADDRESS + 4));
 
-    // Basic checks: MSP points to SRAM, reset handler is within flash
-    if ((app_msp & 0x2FFE0000U) == APP_STACK_SRANGE_MIN)
+    // Check 1: MSP should point to SRAM (0x20000000 - 0x2001FFFF for STM32F407)
+    if ((app_msp >= 0x20000000) && (app_msp <= 0x2001FFFF))
     {
-        if ((app_reset >= APP_START_ADDRESS) && (app_reset < (0x080FFFFFUL)))
-            return true;
+        // Check 2: Reset vector should point to valid flash area (after bootloader, within flash)
+        if ((app_reset >= APP_START_ADDRESS) && (app_reset <= 0x080FFFFF))
+        {
+            // Check 3: Reset vector should be properly aligned
+            if ((app_reset & 0x1) == 0)
+            {
+                return true;
+            }
+        }
     }
     return false;
 }

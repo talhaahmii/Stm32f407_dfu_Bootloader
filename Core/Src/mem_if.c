@@ -12,7 +12,7 @@
 //// === Exported to DFU stack ===
 //USBD_DFU_MediaTypeDef USBD_DFU_fops_FS  =
 //{
-//    (uint8_t*)"@Internal Flash   /0x08000000/03*016Ka,01*016Kg,01*064Kg,07*128Kg,04*016Kg,01*064Kg,07*128Kg",   // String descriptor shown in DFU tools
+//    (uint8_t*)"@Internal Flash   /0x08010000/01*064Kg,07*128Kg,04*016Kg,01*064Kg,07*128Kg",   // String descriptor shown in DFU tools - Starting after 64KB bootloader
 //    MEM_If_Init_FS,
 //    MEM_If_DeInit_FS,
 //    MEM_If_Erase_FS,
