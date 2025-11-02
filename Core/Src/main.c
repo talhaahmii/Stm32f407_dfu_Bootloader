@@ -113,7 +113,7 @@ int main(void)
   MX_USB_DEVICE_Init();
   MX_UART5_Init();
   /* USER CODE BEGIN 2 */
-  HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, BOOTLOADER_MAGIC);
+  //HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR0, BOOTLOADER_MAGIC);
   // Check RTC backup register for bootloader request
   uint32_t magic = HAL_RTCEx_BKUPRead(&hrtc, RTC_BKP_DR0);
   if (magic == BOOTLOADER_MAGIC)
@@ -126,7 +126,24 @@ int main(void)
   // If application valid, jump to it
   if (is_valid_application())
   {
+      // Visual indication that we're about to jump
+      for(int i = 0; i < 3; i++) {
+          HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_SET);
+          HAL_Delay(100);
+          HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET);
+          HAL_Delay(100);
+      }
+      HAL_Delay(200);  // Small delay before jump
+      
       jump_to_application();
+      
+      // If we get here, jump failed - indicate error
+      while(1) {
+          HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_SET);
+          HAL_Delay(100);
+          HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12|GPIO_PIN_13, GPIO_PIN_RESET);
+          HAL_Delay(100);
+      }
   }
 
   // No valid app — start DFU to allow programming
